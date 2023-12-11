@@ -85,7 +85,7 @@ def phase_random(N):
 
 # 2D ERIC model
 
-def 2DERIC(phi, N, K, omega, L):     # L : relative strength \Lambda
+def ERIC_2D(phi, N, K, omega, L):     # L : relative strength \Lambda
     phi_up = np.roll(phi, -1, axis=0)    # getting nearest neighbors
     phi_up [-1, :]= phi[-1, :]           # imposing open boundary conditions
     phi_down = np.roll(phi, 1, axis=0)
@@ -116,10 +116,10 @@ def phase_map_2DERIC(N, T, dt, K, L, omega_initial, phi_initial):
     # RK4 method of time integration
     
     for t in range(num_steps):
-        k1 = 2DERIC(phi, N, K, omega, L)
-        k2 = 2DERIC(phi + 0.5 * dt * k1, N, K, omega, L)
-        k3 = 2DERIC(phi + 0.5 * dt * k2, N, K, omega, L)
-        k4 = 2DERIC(phi + dt * k3, N, K, omega, L)
+        k1 = ERIC_2D(phi, N, K, omega, L)
+        k2 = ERIC_2D(phi + 0.5 * dt * k1, N, K, omega, L)
+        k3 = ERIC_2D(phi + 0.5 * dt * k2, N, K, omega, L)
+        k4 = ERIC_2D(phi + dt * k3, N, K, omega, L)
 
         phi += (dt / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
         phi = np.angle(np.exp(1j * phi))  # Ensuring that phase is between -pi and pi
@@ -187,9 +187,9 @@ T_values = [1000, 1500, 2000]            # adjust as necessary
 
 # Create a PDF file for the plots at the current T value
 
-# uncomment to save pdf file
+# customize output filename as necessary
 
-#pdf_filename = "phasemaps_narrowp3_uniformf_2DERIC.pdf"  
+pdf_filename = "phasemaps_narrowp3_uniformf_2DERIC.pdf"  
 pdf_pages = PdfPages(pdf_filename)
 
 
