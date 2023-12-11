@@ -184,9 +184,9 @@ T_values = [1000, 1500, 2000]                # adjust as necessary
 
 # Create a PDF file for the plots at the current T value
 
-# uncomment to save pdf file
+# customize output filename if necessary
 
-#pdf_filename = "phasemapsQIF_narrowp3_uniformf_QIF_10x10.pdf"
+pdf_filename = "phasemapsQIF_narrowp3_uniformf_QIF_10x10.pdf"
 pdf_pages = PdfPages(pdf_filename)
 
 for T in T_values:
