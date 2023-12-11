@@ -82,7 +82,7 @@ def phase_random(N):
 
 # 2D ERIC model + excitability
 
-def 2DERIC_excitable(phi, N, K, omega, L, b):        
+def ERIC_2D_excitable(phi, N, K, omega, L, b):        
     phi_up = np.roll(phi, -1, axis=0)         # getting nearest neighbors
     phi_up [-1, :]= phi[-1, :]                # imposing open boundary conditions
     phi_down = np.roll(phi, 1, axis=0)
@@ -112,10 +112,10 @@ def phase_map_2DERIC_excitable(N, T, dt, K, L, phi_initial, omega_initial, b):
     phi = phi_initial.copy()         # conditions are used throughout
 
     for t in range(num_steps):
-        k1 = 2DERIC_excitable(phi, N, K, omega, L, b)
-        k2 = 2DERIC_excitable(phi + 0.5 * dt * k1, N, K, omega, L, b)
-        k3 = 2DERIC_excitable(phi + 0.5 * dt * k2, N, K, omega, L, b)
-        k4 = 2DERIC_excitable(phi + dt * k3, N, K, omega, L, b)
+        k1 = ERIC_2D_excitable(phi, N, K, omega, L, b)
+        k2 = ERIC_2D_excitable(phi + 0.5 * dt * k1, N, K, omega, L, b)
+        k3 = ERIC_2D_excitable(phi + 0.5 * dt * k2, N, K, omega, L, b)
+        k4 = ERIC_2D_excitable(phi + dt * k3, N, K, omega, L, b)
 
         phi += (dt / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
         phi = np.angle(np.exp(1j * phi))  # Ensuring that phi is between -pi and pi
@@ -188,9 +188,9 @@ T_values = [1000, 1500, 2000]
 
 # Create a PDF file for the plots at the current T value
 
-# uncomment to save pdf file
+# customize output filename as necessary
 
-#pdf_filename = "phasemaps_alloscillatory_initphasewidth_pi.pdf"
+pdf_filename = "phasemaps_alloscillatory_initphasewidth_pi.pdf"
 pdf_pages = PdfPages(pdf_filename)
 
 
