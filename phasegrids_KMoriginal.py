@@ -162,8 +162,9 @@ T_values = [1000, 1500, 2000]             # adjust as necessary
 
 # Create a PDF file for the plots at the current T value
 
-# uncomment to save pdf file
-#pdf_filename = "phasemaps_KMoriginal_narrowp3_uniformf_5x5_apoint5to3.pdf"
+# customize output filename if necessary
+
+pdf_filename = "phasemaps_KMoriginal_narrowp3_uniformf_5x5_apoint5to3.pdf"
 pdf_pages = PdfPages(pdf_filename)
 
 
