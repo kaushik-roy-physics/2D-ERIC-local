@@ -6,7 +6,8 @@ This repository contains the Python codes for generating the plots presented in 
 
 The 2D ERIC model is defined by the following dynamical equations,
 
-$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \\ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
+$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
+$$+ \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
 
 Here $\theta_{i,j}(t)$ represents the phase of the oscillator at the $(i,j)$-th site in the square lattice. The salient feature of the coupling is that it is asymmetric and contains a genuine higher order harmonic. 
 
