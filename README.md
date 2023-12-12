@@ -1,16 +1,25 @@
 # 2D ERIC model and beyond
 
-This repository contains the Python codes for generating the plots presented in the paper titled "Modeling the temporal self-organization of embryonic genetic oscillators in the mouse PSM into target wave patterns using an excitable phase model with an asymmetric, biharmonic coupling function" by Kaushik Roy and Paul Francois. The code is written in a simple, easy-to-understand manner while invoking some useful capabilities of Python such as: broadcasting in NumPy, multiprocessing modules etc. We have mentioned some salient features of the files in the repository below.
 
 # 2D ERIC (2DE) model:
 
 The 2D ERIC model is defined by the following dynamical equations,
 
-$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
+$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t} \Big \vert_{2DE}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
 
 $$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
 
 Here $\theta_{i,j}(t)$ represents the phase of the oscillator at the $(i,j)$-th site in the square lattice. The salient feature of the coupling is that it is asymmetric and contains a genuine higher order harmonic. 
+
+# 2D ERIC model with excitability (2DE + ex):
+
+We introduce excitability into the above model by introducing a simple $b\, \sin \theta_{i,j}(t)$ term, such that in the absence of coupling, the individual oscillators can be in a quiescent state ($\omega_{i,j} < b$) or oscillatory state ($\omega_{i,j}>b$). The dynamical equations can be similarly written as,
+
+$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}\Big\vert_{2DE+ex}  = \omega_{i,j} - b\, \sin \theta_{i,j}(t) + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
+
+$$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
+
+This repository contains the Python codes for generating the plots presented in the paper titled "Modeling the spatiotemporal self-organization of embryonic genetic oscillators in the mouse PSM into target phase waves using a phase model with an asymmetric, biharmonic coupling function" by Kaushik Roy and Paul Francois. The code is written in a simple, easy-to-understand manner while invoking some useful capabilities of Python such as: broadcasting in NumPy, multiprocessing modules etc. We have mentioned some salient features of the files in the repository below.
 
 1. Files titled "phasegrids_xxx.py" generate the 10x10 or 5x5 grids of phasemaps at different times or parameter values for the different models discussed in the paper. These include the 2D ERIC model with an asymmetric, biharmonic coupling function which is the primary model that we are interested in. In addition, it contains the 2D ERIC model with excitability and other models that we have mentioned in the supplement such as the 2D Kuramoto model, 2D Rectified KUramoto (ReKU) model and the 2D Kuramoto model for Quadratic-Integrate-and-Fire (QIF) neurons.
 
