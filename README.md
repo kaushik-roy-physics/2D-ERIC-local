@@ -1,3 +1,14 @@
+# Details of the repository
+
+This repository contains the codes (.ipynb, .py) for generating the figures and movies presented in the paper titled "Foci, waves, excitability: self-organization of phase waves in a model of asymmetrically coupled embryonic oscillators" by Kaushik Roy and Paul Francois. In addition, it contains the folder 'phasegrids' which contains the .mp4 files for the supplementary movies included in the supplement. 
+
+Most of the figures can be generated using the code blocks in the "2DERIC+excitable.ipynb" JuPyteR notebook. To generate the movies ($10\times 10$ grids of time evolving phasemaps), we have leveraged batched processing and just-in-time (JIT) compilation with JAX for GPU-accelerated computation. Our implementation simultaneously simulates all parameter combinations (in the $(a,\Lambda)$ or $(b,\Lambda)$ space) as a single batched operation on the GPU (NVIDIA GeForce RTX 4070, 8 GB VRAM), where each integration step updates hundreds of grids (e.g., 100 parameter combinations x 50 x 50 spatial grids = 250,000 cells) in parallel. Combined with optimized timepoint capture, i.e running simulations once to maximum time rather than re-simulating for each timepoint, and minimal CPU-GPU data transfers, computation times are reduced to $\mathcal{O}(100)$ seconds even for large-scale parameter sweeps. This represents an almost 100x speedup compared to traditional CPU-based \texttt{multiprocessing} approaches. The implementation also supports CPU backends for systems without GPU acceleration, maintaining the computational efficiency of batched operations.
+
+1. "phasegrids_gpu_mp4.py": For each model discussed in the paper, this code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the phasemaps in the $(K=a\Delta_{\omega},\Lambda)$ parameter space at a specific time. The model used and the initial phases, frequencies used are clearly shown. The models used include 2D ERIC model with an asymmetric, biharmonic coupling function which is the primary model that we are interested in. In addition, it contains the 2D ERIC model with excitability and other models that we have mentioned in the supplement such as the 2D Kuramoto model, 2D Rectified KUramoto (ReKU) model and the 2D Kuramoto model for Quadratic-Integrate-and-Fire (QIF) neurons. The user can incorporate any other phase model into this modular code and do similar dynamical studies.
+
+2. "phasegrids_gpu_truncnorm.py":  Same as above but samples the natural frequencies of the oscillators from a truncated normal distribution with user defined mean and scale.
+
+
 # 2D ERIC model and beyond
 
 
@@ -47,15 +58,6 @@ $$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{QIF}^{KM}  = \ome
 
 $$ + \Lambda \Big( \Big( 1 -  \cos \big(\theta_{i,j+1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i,j-1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i+1,j}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i-1,j}(t) -\theta_{i,j}(t) \big) \Big) \Big) \Big] $$
 
-# Details of the repository
-
-This repository contains the Python codes (.ipynb, .py) for generating the figures and movies presented in the paper titled "Foci, waves, excitability: self-organization of phase waves in a model of asymmetrically coupled embryonic oscillators" by Kaushik Roy and Paul Francois. In addition, it contains the folder 'phasegrids' which contains the .mp4 files for the supplementary movies included in the supplement. 
-
-Most of the figures can be generated using the code blocks in the "2DERIC+excitable.ipynb" JuPyteR notebook. To generate the movies ($10\times 10$ grids of time evolving phasemaps), we have leveraged batched processing and just-in-time (JIT) compilation with JAX for GPU-accelerated computation. Our implementation simultaneously simulates all parameter combinations (in the $(a,\Lambda)$ or $(b,\Lambda)$ space) as a single batched operation on the GPU (NVIDIA GeForce RTX 4070, 8 GB VRAM), where each integration step updates hundreds of grids (e.g., 100 parameter combinations x 50 x 50 spatial grids = 250,000 cells) in parallel. Combined with optimized timepoint capture, i.e running simulations once to maximum time rather than re-simulating for each timepoint, and minimal CPU-GPU data transfers, computation times are reduced to $\mathcal{O}(100)$ seconds even for large-scale parameter sweeps. This represents an almost 100x speedup compared to traditional CPU-based \texttt{multiprocessing} approaches. The implementation also supports CPU backends for systems without GPU acceleration, maintaining the computational efficiency of batched operations.
-
-1. "phasegrids_gpu_mp4.py": For each model discussed in the paper, this code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the phasemaps in the $(K=a\Delta_{\omega},\Lambda)$ parameter space at a specific time. The model used and the initial phases, frequencies used are clearly shown. The models used include 2D ERIC model with an asymmetric, biharmonic coupling function which is the primary model that we are interested in. In addition, it contains the 2D ERIC model with excitability and other models that we have mentioned in the supplement such as the 2D Kuramoto model, 2D Rectified KUramoto (ReKU) model and the 2D Kuramoto model for Quadratic-Integrate-and-Fire (QIF) neurons. The user can incorporate any other phase model into this modular code and do similar dynamical studies.
-
-2. "phasegrids_gpu_truncnorm.py":  Same as above but samples the natural frequencies of the oscillators from a truncated normal distribution with user defined mean and scale.
 
 3. "phasegrids_gpu_latticesize.py": Same as the code described in 1 but studying the dependence on lattice sizes.
 
