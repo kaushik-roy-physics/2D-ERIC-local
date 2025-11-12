@@ -37,7 +37,7 @@ The dynamical equations for the 2D Kuramoto model with nearest neighbor coupling
 
 The coupling function is given by:
 
-$$ h_{\text{ReKU}}(\theta) = \text{max}(\sin \theta, 0) $$.
+$$ h_{\text{ReKU}}(\theta) = \text{max}(\sin \theta, 0) $$
 
 # 2D Kuramoto model for quadratic integrate and fire (QIF) neurons:
 
