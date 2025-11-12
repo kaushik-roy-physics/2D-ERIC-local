@@ -19,16 +19,32 @@ $$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}\Big\vert_{2DE+ex}  = \omega_{
 
 $$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
 
+# 2D Kuramoto model:
+
+The dynamical equations for the 2D Kuramoto model with nearest neighbor coupling are given by:
+
+ $$  \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t} \Bigg)_{KM} = \omega_{i,j} + K \, \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
+ 
+ $$ + \sin\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big) \Big] $$
+
+ # 2D Rectified KUramoto (ReKU) model:
+
+ This model is inspired from the work by Ho et. al. (https://doi.org/10.1073/pnas.2401604121). When the nearest neighbors are coupled to each other, the phase dynamics is governed by the following dynamical equations:
+
+  $$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{\text{ReKU}}  = \omega_{i,j} + K \, \Big[  h_{\text{ReKU}} \big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + h_{\text{ReKU}} \big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
+  
+  $$ + h_{\text{ReKU}}\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) + h_{\text{ReKU}}\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big) \Big] $$
+
+The coupling function is given by: $$ h_{\text{ReKU}}(\theta) = \text{max}(\sin \theta, 0) $$
+
 # Details of the repository
 
-This repository contains the Python codes for generating the plots presented in the paper titled "Modeling the spatiotemporal self-organization of embryonic genetic oscillators in the mouse PSM into target phase waves using a phase model with an asymmetric, biharmonic coupling function" by Kaushik Roy and Paul Francois. The code is written in a simple, easy-to-understand manner while invoking some useful capabilities of Python such as: broadcasting in NumPy, multiprocessing modules etc. We have mentioned some salient features of the files in the repository below.
+This repository contains the Python codes for generating the figures and movies presented in the paper titled "Foci, waves, excitability: self-organization of phase waves in a model of asymmetrically coupled embryonic oscillators" by Kaushik Roy and Paul Francois. Most of the figures can be generated using the code blocks in the "2DERIC+excitable.ipynb" JuPyteR notebook. To generate the movies ($10\times 10$ grids of time evolving phasemaps), we have leveraged batched processing and just-in-time (JIT) compilation with JAX for GPU-accelerated computation. Our implementation simultaneously simulates all parameter combinations (in the $(a,\Lambda)$ or $(b,\Lambda)$ space) as a single batched operation on the GPU (NVIDIA GeForce RTX 4070, 8 GB VRAM), where each integration step updates hundreds of grids (e.g., $100$ parameter combinations $\times$ 50 $\times$50 spatial grids = $250,000$ cells) in parallel. Combined with optimized timepoint capture, i.e running simulations once to maximum time rather than re-simulating for each timepoint, and minimal CPU-GPU data transfers, computation times are reduced to $\mathcal{O}(100)$ seconds even for large-scale parameter sweeps. This represents an almost $100$x speedup compared to traditional CPU-based \texttt{multiprocessing} approaches. The implementation also supports CPU backends for systems without GPU acceleration, maintaining the computational efficiency of batched operations.
 
-1. Files titled "phasegrids_xxx.py" generate the 10x10 or 5x5 grids of phasemaps at different times or parameter values for the different models discussed in the paper. These include the 2D ERIC model with an asymmetric, biharmonic coupling function which is the primary model that we are interested in. In addition, it contains the 2D ERIC model with excitability and other models that we have mentioned in the supplement such as the 2D Kuramoto model, 2D Rectified KUramoto (ReKU) model and the 2D Kuramoto model for Quadratic-Integrate-and-Fire (QIF) neurons.
+1. "phasegrids_gpu_mp4.py": For each model discussed in the paper, this code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the phasemaps in the $(K=a\Delta_{\omega},\Lambda)$ parameter space at a specific time. The model used and the initial phases, frequencies used are clearly shown. The models used include 2D ERIC model with an asymmetric, biharmonic coupling function which is the primary model that we are interested in. In addition, it contains the 2D ERIC model with excitability and other models that we have mentioned in the supplement such as the 2D Kuramoto model, 2D Rectified KUramoto (ReKU) model and the 2D Kuramoto model for Quadratic-Integrate-and-Fire (QIF) neurons. The user can incorporate any other phase model into this modular code and do similar dynamical studies.
 
-In principle, the functions describing the models can all be incorporated in a single function file and invoked in the main code. However, we have included them in separate codes for easy of use and better intelligibility. The code is highly modular meaning that anyone interested in implementing their own 2D model can simply make a few changes in the code and generate the same phasemap grids. The advantage of this visualization is that it allows us to see the phase dynamics for a range of parameter values and at different times simultaneously. 
+2. "phasegrids_gpu_truncnorm.py":  Same as above but samples the natural frequencies of the oscillators from a truncated normal distribution with user defined mean and scale.
 
-Except for the "phasegrids_2DERIC_excitable_varyabL.py" file, all other "phasegrids_xxx.py" files generate a multipage .pdf file where each page contains a timeshot of the phasemaps for a range of parameter values. For the "phasegrids_2DERIC_excitable_varyabL.py" file, we get a multipage .pdf file but all the phasemaps are obtained at a certain fixed time with each page of the .pdf file containing phasemaps for different values of the excitable parameter $b$ and relative coupling strength $\Lambda$ at a fixed primary coupling strength $K$. This code therefore allows us to see the phasemaps at a certain time in the $(K,b,\Lambda)$ parameter space which is very useful. 
+3. "phasegrids_gpu_latticesize.py": Same as the code described in 1 but studying the dependence on lattice sizes.
 
-2. The "2DERIC+excitable.ipynb" file is a JuPyteR notebook that allows the user to obtain a variety of physical quantities for the 2D ERIC (+excitable) model such as phasemaps at different times for fixed $K$ and $\Lambda$ values, timeshots of local coherence maps, global coherence vs time, timeshots of phase fields, timeshots of instantaneous frequency maps and average frequency maps. The blocks of the code are similar to that used to generate the phasemap grids mentioned above but we do not use multiprocessing module here. Instead, this gives the user an interactive experience by allowing them to study the models discussed in the paper (and beyond) in a highly comprehensive manner.
-
-3. Finally, we have the "Animations" folder which contains videos of the phasemaps generated by the 2D ERIC (+excitable) models for better visualization of the temporal patterns.  
+4. "phasegrids_gpu_abl.py": This is specifically for the 2D ERIC model with excitability (2DE + ex) described above. This code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the instantaneous phasemaps in the $(b,\Lambda)$ parameter space at a given $K=a\Delta_{\omega}$. 
