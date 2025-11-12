@@ -41,11 +41,9 @@ The coupling function is given by: $ h_{\text{ReKU}}(\theta) = \text{max}(\sin \
 
 The phase dynamics is described by the following equations:
 
-$$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{QIF}^{KM}  = \omega_{i,j} + K \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) $$
+$$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{QIF}^{KM}  = \omega_{i,j} + K \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big) $$
 
-$$ + \sin\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big)  + \Lambda \Big\{ \Big( 1 -  \cos \big(\theta_{i,j+1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i,j-1}(t) -\theta_{i,j}(t) \big) \Big)$$
-
-$$ + \Big( 1 -  \cos \big(\theta_{i+1,j}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i-1,j}(t) -\theta_{i,j}(t) \big) \Big) \Big\} \Big] $$
+$$ + \Lambda \Big\{ \Big( 1 -  \cos \big(\theta_{i,j+1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i,j-1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i+1,j}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i-1,j}(t) -\theta_{i,j}(t) \big) \Big) \Big\} \Big] $$
 
 # Details of the repository
 
