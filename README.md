@@ -5,7 +5,7 @@
 
 The 2D ERIC model is defined by the following dynamical equations,
 
-$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t} \Big \vert_{2DE}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
+$$ \Bigg( \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t} \Bigg)_{2DE}  = \omega_{i,j} + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
 
 $$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
 
@@ -15,7 +15,7 @@ Here $\theta_{i,j}(t)$ represents the phase of the oscillator at the $(i,j)$-th 
 
 We introduce excitability into the above model by introducing a simple $b\, \sin \theta_{i,j}(t)$ term, such that in the absence of coupling, the individual oscillators can be in a quiescent state ($\omega_{i,j} < b$) or oscillatory state ($\omega_{i,j}>b$). The dynamical equations can be similarly written as,
 
-$$ \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t}\Big\vert_{2DE+ex}  = \omega_{i,j} - b\, \sin \theta_{i,j}(t) + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
+$$ \Bigg( \frac{\mathrm{d}\theta_{i,j} (t) }{\mathrm{d}t} \Bigg)_{2DE+ex}  = \omega_{i,j} - b\, \sin \theta_{i,j}(t) + K \Big( \sin(\theta_{i-1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j-1}(t) -\theta_{i,j}(t) ) + \sin(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) $$
 
 $$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i+1,j}(t) -\theta_{i,j}(t) ) + \sin^2(\theta_{i,j-1}(t) -\theta_{i,j} (t)) + \sin^2(\theta_{i,j+1}(t) -\theta_{i,j}(t) ) \big) \Big)  $$
 
@@ -23,7 +23,7 @@ $$ + \Lambda \big ( \sin^2(\theta_{i-1,j}(t) -\theta_{i,j} (t)) + \sin^2(\theta_
 
 The dynamical equations for the 2D Kuramoto model with nearest neighbor coupling are given by:
 
- $$  \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t} \Bigg)_{KM} = \omega_{i,j} + K \, \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
+ $$  \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t} \Bigg)_{KM} = \omega_{i,j} + K \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
  
  $$ + \sin\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big) \Big] $$
 
@@ -31,11 +31,21 @@ The dynamical equations for the 2D Kuramoto model with nearest neighbor coupling
 
  This model is inspired from the work by Ho et. al. (https://doi.org/10.1073/pnas.2401604121). When the nearest neighbors are coupled to each other, the phase dynamics is governed by the following dynamical equations:
 
-  $$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{\text{ReKU}}  = \omega_{i,j} + K \, \Big[  h_{\text{ReKU}} \big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + h_{\text{ReKU}} \big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
+  $$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{\text{ReKU}}  = \omega_{i,j} + K \Big[  h_{\text{ReKU}} \big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + h_{\text{ReKU}} \big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) $$
   
   $$ + h_{\text{ReKU}}\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) + h_{\text{ReKU}}\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big) \Big] $$
 
-The coupling function is given by: $$ h_{\text{ReKU}}(\theta) = \text{max}(\sin \theta, 0) $$
+The coupling function is given by: $ h_{\text{ReKU}}(\theta) = \text{max}(\sin \theta, 0) $.
+
+# 2D Kuramoto model for quadratic integrate and fire (QIF) neurons:
+
+The phase dynamics is described by the following equations:
+
+$$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{QIF}^{KM}  = \omega_{i,j} + K \Big[  \sin\big(\theta_{i,j+1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i,j-1}(t) -\theta_{i,j}(t)\big) + \sin\big(\theta_{i+1,j}(t) -\theta_{i,j}(t)\big) $$
+
+$$ + \sin\big(\theta_{i-1,j}(t) -\theta_{i,j}(t)\big)  + \Lambda \Big\{ \Big( 1 -  \cos \big(\theta_{i,j+1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i,j-1}(t) -\theta_{i,j}(t) \big) \Big)$$
+
+$$ + \Big( 1 -  \cos \big(\theta_{i+1,j}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i-1,j}(t) -\theta_{i,j}(t) \big) \Big) \Big\} \Big] $$
 
 # Details of the repository
 
