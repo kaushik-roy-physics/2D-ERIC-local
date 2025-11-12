@@ -8,6 +8,10 @@ Most of the figures can be generated using the code blocks in the "2DERIC+excita
 
 2. "phasegrids_gpu_truncnorm.py":  Same as above but samples the natural frequencies of the oscillators from a truncated normal distribution with user defined mean and scale.
 
+3. "phasegrids_gpu_latticesize.py": Same as the code described in 1 but studying the dependence on lattice sizes.
+
+4. "phasegrids_gpu_abl.py": This is specifically for the 2D ERIC model with excitability (2DE + ex) described above. This code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the instantaneous phasemaps in the $(b,\Lambda)$ parameter space at a given $K=a\Delta_{\omega}$. 
+
 
 # 2D ERIC model and beyond
 
@@ -59,6 +63,4 @@ $$ \Bigg( \frac{\mathrm{d}\theta_{i,j}(t)}{\mathrm{d}t}\Bigg)_{QIF}^{KM}  = \ome
 $$ + \Lambda \Big( \Big( 1 -  \cos \big(\theta_{i,j+1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i,j-1}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i+1,j}(t) -\theta_{i,j}(t) \big) \Big) + \Big( 1 -  \cos \big(\theta_{i-1,j}(t) -\theta_{i,j}(t) \big) \Big) \Big) \Big] $$
 
 
-3. "phasegrids_gpu_latticesize.py": Same as the code described in 1 but studying the dependence on lattice sizes.
 
-4. "phasegrids_gpu_abl.py": This is specifically for the 2D ERIC model with excitability (2DE + ex) described above. This code generates movies of time evolving phasemaps as 10x10 grids where each frame shows the instantaneous phasemaps in the $(b,\Lambda)$ parameter space at a given $K=a\Delta_{\omega}$. 
