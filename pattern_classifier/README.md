@@ -328,9 +328,8 @@ python main.py analyze
    - Target wave dominance regime ($\Lambda$ range where >50% target)
    - Peak target fraction and corresponding $\Lambda$
    - Transition points (onset/loss of dominance)
-4. Creates publication-quality plots
-5. Generates referee response text template
-6. Creates classifier performance summary for manuscript
+4. Creates plots
+5. Creates classifier performance summary
 
 **Output**:
 ```
