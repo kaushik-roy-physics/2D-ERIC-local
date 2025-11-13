@@ -1,0 +1,56 @@
+# Paths
+paths:
+  simulation_data: "data/simulation_data"
+  phase_maps: "data/phase_maps"
+  processed_data: "data/processed"
+  models: "outputs/models"
+  figures: "outputs/figures"
+  results: "outputs/results"
+
+# Simulation parameters
+simulation:
+  w_min: 0.03490658503988659  # 2π/180 rad/min
+  w_max: 0.04188790204786391  # 2π/150 rad/min
+  N: 50                        # Lattice size (50x50)
+  T_final: 3000                # Integration time (minutes)
+  dt: 0.1                      # Time step
+  K_factor: 0.9                # Coupling strength factor
+
+# Analysis parameters
+analysis:
+  lambda_range: [0, 2.5]
+  n_lambda_points: 50
+  n_realizations_per_lambda: 100
+
+# Sampling for training
+sampling:
+  samples_per_lambda: 10
+  random_seed: 42
+
+# Pattern categories
+patterns:
+  categories:
+    - 'target'
+    - 'spiral'
+    - 'mixed'
+    - 'sync'
+    - 'disorder'
+    - 'multiple'
+    - 'other'
+  
+  shortcuts:
+    target: 't'
+    spiral: 's'
+    mixed: 'm'
+    sync: 'y'
+    disorder: 'd'
+    multiple: 'u'
+    other: 'o'
+
+# ML Model parameters
+model:
+  n_estimators: 200
+  max_depth: 15
+  min_samples_split: 5
+  cv_folds: 5
+  random_state: 42
