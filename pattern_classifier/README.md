@@ -66,9 +66,7 @@ PyYAML>=6.0            # Configuration file parsing
 joblib>=1.1.0          # Model serialization
 ```
 
-## Installation
-
-### Option 1: Pip Install (Recommended)
+## Installation: Pip Install (Recommended)
 
 # Clone the repository
 ```bash
